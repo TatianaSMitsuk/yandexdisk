@@ -1,15 +1,23 @@
 import tkinter as tk
 from tkinter import filedialog
 import requests
+from dotenv import load_dotenv
+import os
 
-TOKEN = 'y0__xDqrBQY6LQ7IIOqpoYVuUh3KWnuPCUeTEDZh0X16-4fFxY'
+load_dotenv()  # Загружает переменные из файла .env
+TOKEN = os.getenv('TOKEN')
+
 folder_path = '/MyCreateDirectory4'
 
 # URL-запроса
 url = f'https://cloud-api.yandex.net/v1/disk/resources?path={folder_path}'
 
 # заголовки авторизации
-headers = {'Authorization': f'OAuth {TOKEN}'}
+
+if TOKEN:
+    headers = {'Authorization': f'OAuth {TOKEN}'}
+else:
+    print('Нет переменной окружения с ключем "TOKEN"')
 
 # создание папки
 response = requests.put(url, headers=headers)
