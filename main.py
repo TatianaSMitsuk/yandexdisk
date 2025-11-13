@@ -1,6 +1,4 @@
-import tkinter as tk
-from tkinter import filedialog
-import requests
+
 from dotenv import load_dotenv
 import os
 import MyFunc
