@@ -3,58 +3,24 @@ from tkinter import filedialog
 import requests
 from dotenv import load_dotenv
 import os
+import MyFunc
+import MyConst
 
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
 
-folder_path = '/MyCreateDirectory4'
-
-# URL-запроса
-url = f'https://cloud-api.yandex.net/v1/disk/resources?path={folder_path}'
-
-# заголовки авторизации
-
-if TOKEN:
-    headers = {'Authorization': f'OAuth {TOKEN}'}
-else:
-    print('Нет переменной окружения с ключем "TOKEN"')
-
 # создание папки
-response = requests.put(url, headers=headers)
+kod=MyFunc.direct_create(MyConst.url,MyFunc.head_init(TOKEN,1))
 
 #  Проверьте результат
-if response.status_code == 201:
-    print(f'Папка "{folder_path}" успешно создана!')
+if kod[0] == 201:
+    print(f'Папка "{MyConst.folder_path}" успешно создана!')
 else:
-    print(f'Ошибка при создании папки: {response.status_code} - {response.json()["message"]}')
+    print(f'Ошибка при создании папки: {kod[0]} - {kod[1]}')
+#грузим файл
+kod=MyFunc.loading_file(MyConst.file_name,MyConst.urlToFile,MyFunc.head_init(TOKEN,2))
 
-
-root = tk.Tk()
-root.withdraw()
-file_path = filedialog.askopenfilename()
-
-remote_filename = folder_path + '/' + file_path.split('/')[-1]
-
-# URL для загрузки файла на Яндекс Диск
-urlToFile = f'https://cloud-api.yandex.net/v1/disk/resources/upload?path={remote_filename}'
-
-headers = {
-    'Authorization': f'OAuth {TOKEN}',
-    'Content-Type': 'application/x-www-form-urlencoded'
-}
-# Открываем локальный файл для чтения в бинарном режиме
-
-with open(file_path, 'rb') as f:
-    # Отправляем PUT-запрос, который создает файл на диске
-    responseGET = requests.get(urlToFile, headers=headers)
-    if responseGET.status_code == 200:
-        dynamicUrl = responseGET.json()["href"]
-        response = requests.put(dynamicUrl, f)
-        if response.status_code == 201:
-            print("Файл успешно загружен!")
-        else:
-            print(f"Ошибка при загрузке файла: {response.status_code}- {response.json()['message']}")
-    else:
-        print(f"Ошибка при размещении файла: {responseGET.status_code}- {responseGET.json()['message']} ")
-
-
+# удаляем
+print("Убрать за собой?")
+input()
+MyFunc.folder_del(TOKEN,MyConst.folder_path,MyConst.const_url,MyFunc.head_init(TOKEN,1))
