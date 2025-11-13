@@ -4,7 +4,7 @@ import requests
 from dotenv import load_dotenv
 import os
 
-load_dotenv()  # Загружает переменные из файла .env
+load_dotenv()
 TOKEN = os.getenv('TOKEN')
 
 folder_path = '/MyCreateDirectory4'
