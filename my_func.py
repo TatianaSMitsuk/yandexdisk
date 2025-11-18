@@ -17,6 +17,7 @@ def head_init(token,type):
     return headers
 
 def direct_create (url, headers):
+    import requests
     # создание папки
     response = requests.put(url, headers=headers)
     # возвращаем код статуса

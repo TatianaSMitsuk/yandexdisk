@@ -5,4 +5,4 @@ const_url='https://cloud-api.yandex.net/v1/disk/resources'
 url = f'{const_url}?path={folder_path}'
 remote_filename = folder_path + '/' + file_name
 #url для запроса на загрузку
-urlToFile = f'{const_url}/upload?path={remote_filename}'
+url_to_file = f'{const_url}/upload?path={remote_filename}'
