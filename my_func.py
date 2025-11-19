@@ -1,4 +1,8 @@
 import requests
+
+import my_const
+
+
 #формирует заголовок инициализацииб проверяя наличие файла окружения  с токеном
 # 1 тип - только токен
 # другой тип - еще тип данных (для загрузки файла)
@@ -61,3 +65,27 @@ def folder_del(token,folder_path,const_url,headers):
         print(f'Статус код: {response.status_code}')
         print(f'Ответ: {response.text}')
     return response.status_code
+
+def get_md5_for_file(file_path):
+    import hashlib
+    """
+    Вычисляет MD5-хэш файла.
+
+    Args:
+        file_path (str): Путь к файлу.
+
+    Returns:
+        str: MD5-хэш файла в виде шестнадцатеричной строки.
+    """
+    md5_hash = hashlib.md5()
+    with open(file_path, "rb") as f:
+        # Считываем файл блоками по 4096 байт, чтобы не загружать весь файл в память
+        for byte_block in iter(lambda: f.read(4096), b""):
+            md5_hash.update(byte_block)
+    return md5_hash.hexdigest()
+
+
+def md5_file_yadisk(file_path,headers):
+    response=requests.get(file_path,headers=headers)
+ #   print( response.json()['_embedded']['items'][0]['md5'])
+    return response.json()['_embedded']['items'][0]['md5']

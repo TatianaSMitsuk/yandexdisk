@@ -17,6 +17,9 @@ else:
     print(f'Ошибка при создании папки: {kod[0]} - {kod[1]}')
 #грузим файл
 kod=my_func.loading_file(my_const.file_name,my_const.url_to_file,my_func.head_init(TOKEN,2))
+md5_file_in=my_func.get_md5_for_file(my_const.file_name)
+print(md5_file_in)
+my_func.md5_file_yadisk(my_const.url , my_func.head_init(TOKEN,1))
 
 # удаляем
 print("Убрать за собой?")
