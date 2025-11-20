@@ -86,6 +86,7 @@ def get_md5_for_file(file_path):
 
 
 def md5_file_yadisk(file_path,headers):
+    import requests
     response=requests.get(file_path,headers=headers)
  #   print( response.json()['_embedded']['items'][0]['md5'])
     return response.json()['_embedded']['items'][0]['md5']

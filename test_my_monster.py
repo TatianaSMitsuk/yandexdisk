@@ -10,13 +10,14 @@ TOKEN = os.getenv('TOKEN')
 def test_dir_create():
     load_dotenv()
     TOKEN = os.getenv('TOKEN')
-    assert MyFunc.direct_create(MyConst.url,MyFunc.head_init(TOKEN,1))==201
+    assert my_func.direct_create(my_const.url,my_func.head_init(TOKEN,1))==201
 
 def test_file_load():
     from dotenv import load_dotenv
     import os
     import my_func
     import my_const
+    import requests
 
     load_dotenv()
     TOKEN = os.getenv('TOKEN')
@@ -38,3 +39,4 @@ def test_file_load():
     # удаляем
 
     my_func.folder_del(TOKEN, my_const.folder_path, my_const.const_url, my_func.head_init(TOKEN, 1))
+    return md5_file_in
