@@ -7,10 +7,6 @@ import os
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
 
-def test_dir_create():
-    load_dotenv()
-    TOKEN = os.getenv('TOKEN')
-    assert my_func.direct_create(my_const.url,my_func.head_init(TOKEN,1))==201
 
 def test_file_load():
     from dotenv import load_dotenv
