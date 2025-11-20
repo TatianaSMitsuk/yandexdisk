@@ -31,8 +31,7 @@ def test_file_load():
     md5_file_in = my_func.get_md5_for_file(my_const.file_name)
 
 
-    assert  md5_file_in==my_func.md5_file_yadisk(my_const.url, my_func.head_init(TOKEN, 1))
+    assert  str(md5_file_in) == str(my_func.md5_file_yadisk(my_const.url, my_func.head_init(TOKEN, 1)))
     # удаляем
 
     my_func.folder_del(TOKEN, my_const.folder_path, my_const.const_url, my_func.head_init(TOKEN, 1))
-    return md5_file_in
