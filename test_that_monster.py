@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 import os
 import function_test_load
 import const_test_load
+import pytest
 
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
