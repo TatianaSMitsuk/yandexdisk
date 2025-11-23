@@ -6,7 +6,9 @@ import const_test_load
 
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
-@pytest.fixture(autouse=True)
+
+
+@pytest.fixture()
 def f_file_load():
 
     code_dir_create = function_test_load.direct_create(const_test_load.url, function_test_load.head_init(TOKEN, 1))
