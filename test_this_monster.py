@@ -17,7 +17,7 @@ def test_file_load():
     else:
         print(f'Ошибка при создании папки: {code_dir_create[0]} - {code_dir_create[1]}')
 
-    my_func.loading_file(const_test_load.file_name, const_test_load.url_to_file, function_test_load.head_init(TOKEN, 2))
+    function_test_load.loading_file(const_test_load.file_name, const_test_load.url_to_file, function_test_load.head_init(TOKEN, 2))
 
 
     md5_file_in = function_test_load.get_md5_for_file(const_test_load.file_name)
