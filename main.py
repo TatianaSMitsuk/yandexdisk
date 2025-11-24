@@ -1,7 +1,7 @@
 
 from dotenv import load_dotenv
 import os
-import function_test_load
+import function_load as function_test_load
 import const_test_load
 
 load_dotenv()

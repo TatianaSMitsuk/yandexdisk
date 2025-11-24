@@ -23,14 +23,11 @@ def head_init(token,type):
 
 def direct_create (url, headers):
 
-    # создание папки
     response = requests.put(url, headers=headers)
-    # возвращаем код статуса
     return (response.status_code,response.json().get("message"))
 
 def loading_file(filename, urlToFile, headers):
 
-        # Отправляем PUT-запрос, который создает файл на диске
     responseGET = requests.get(urlToFile, headers=headers)
     if responseGET.status_code == 200:
         dynamicUrl = responseGET.json()["href"]
