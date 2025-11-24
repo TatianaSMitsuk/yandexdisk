@@ -8,7 +8,7 @@ import requests
 
 #load_dotenv()
 #TOKEN = os.getenv('TOKEN')
-TOKEN='y0__xDqrBQY6LQ7IIOqpoYVuUh3KWnuPCUeTEDZh0X16-4fFxY'
+TOKEN='Здесь был токен'
 
 
 @pytest.fixture(params=['example.txt',"1.mp3"])
