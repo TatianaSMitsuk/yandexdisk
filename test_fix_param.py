@@ -1,15 +1,14 @@
 
-#import dotenv
-#import os
+import dotenv
+import os
 import function_load
 import const_test_load
 import pytest
 import time
-import requests
 
-#dotenv.load_dotenv()
-#TOKEN = os.getenv('TOKEN')
-TOKEN='здесь был токен'
+
+dotenv.load_dotenv()
+TOKEN = os.getenv('TOKEN')
 
 
 @pytest.fixture(params=['example.txt',"1.mp3"])
