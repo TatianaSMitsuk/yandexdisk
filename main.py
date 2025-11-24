@@ -8,7 +8,7 @@ load_dotenv()
 TOKEN = os.getenv('TOKEN')
 
 # создание папки
-code_dir_create=function_test_load.direct_create(const_test_load.url, function_test_load.head_init(TOKEN,1))
+code_dir_create=function_test_load.direct_create(const_test_load.url, TOKEN)
 
 #  Проверьте результат
 if code_dir_create[0] == 201:
@@ -16,12 +16,12 @@ if code_dir_create[0] == 201:
 else:
     print(f'Ошибка при создании папки: {code_dir_create[0]} - {code_dir_create[1]}')
 #грузим файл
-function_test_load.loading_file(const_test_load.file_name,const_test_load.url_to_file,function_test_load.head_init(TOKEN,2))
+function_test_load.loading_file(const_test_load.file_name,const_test_load.url_to_file, TOKEN)
 md5_file_in=function_test_load.get_md5_for_file(const_test_load.file_name)
 print(md5_file_in)
-print(function_test_load.md5_file_yadisk(const_test_load.url , function_test_load.head_init(TOKEN,1)))
+print(function_test_load.md5_file_yadisk(const_test_load.url , TOKEN))
 
 
 print("Убрать за собой?")
 input()
-function_test_load.folder_del(TOKEN,const_test_load.folder_path,const_test_load.const_url,function_test_load.head_init(TOKEN,1))
+function_test_load.folder_del(TOKEN,const_test_load.folder_path,const_test_load.const_url)

@@ -21,13 +21,23 @@ def head_init(token,type):
 
     return headers
 
-def direct_create (url, headers):
+def direct_create (url, token):
 
+    if token:
+        headers = {'Authorization': f'OAuth {token}'}
+    else:
+        print('Нет переменной окружения с ключем "TOKEN"')
     response = requests.put(url, headers=headers)
     return (response.status_code,response.json().get("message"))
 
-def loading_file(filename, urlToFile, headers):
-
+def loading_file(filename, urlToFile, token):
+    if token:
+        headers = {
+                'Authorization': f'OAuth {token}',
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+    else:
+        print('Нет переменной окружения с ключем "TOKEN"')
     responseGET = requests.get(urlToFile, headers=headers)
     if responseGET.status_code == 200:
         dynamicUrl = responseGET.json()["href"]
@@ -41,7 +51,11 @@ def loading_file(filename, urlToFile, headers):
         print(f"Ошибка при размещении файла: {responseGET.status_code}- {responseGET.json()['message']} ")
     return responseGET.status_code
 
-def folder_del(token,folder_path,const_url,headers):
+def folder_del(token, folder_path, const_url):
+    if token:
+        headers = {'Authorization': f'OAuth {token}'}
+    else:
+        print('Нет переменной окружения с ключем "TOKEN"')
     params = {
         'path': folder_path
     }
@@ -66,7 +80,10 @@ def get_md5_for_file(file_path):
     return md5_hash.hexdigest()
 
 
-def md5_file_yadisk(file_path,headers):
-
+def md5_file_yadisk(file_path, token):
+    if token:
+        headers = {'Authorization': f'OAuth {token}'}
+    else:
+        print('Нет переменной окружения с ключем "TOKEN"')
     response=requests.get(file_path,headers=headers)
     return response.json()['_embedded']['items'][0]['md5']
