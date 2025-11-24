@@ -1,14 +1,15 @@
 
-#from dotenv import load_dotenv
+#import dotenv
 #import os
 import function_load
 import const_test_load
 import pytest
+import time
 import requests
 
-#load_dotenv()
+#dotenv.load_dotenv()
 #TOKEN = os.getenv('TOKEN')
-TOKEN='Здесь был токен'
+TOKEN='здесь был токен'
 
 
 @pytest.fixture(params=['example.txt',"1.mp3"])
@@ -25,8 +26,9 @@ def f_file_load(request):
     yield
 
     function_load.folder_del(TOKEN, const_test_load.folder_path, const_test_load.const_url)
+    time.sleep(2)
 
 
 def test_load_file (f_file_load):
     md5_file_in = function_load.get_md5_for_file(const_test_load.file_name)
-    assert  str(md5_file_in) == str(function_load.md5_file_yadisk(const_test_load.url, function_load.head_init(TOKEN, 1)))
+    assert  str(md5_file_in) == str(function_load.md5_file_yadisk(const_test_load.url, TOKEN))

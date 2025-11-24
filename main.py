@@ -1,11 +1,12 @@
 
-from dotenv import load_dotenv
+import dotenv
 import os
 import function_load as function_test_load
 import const_test_load
 
-load_dotenv()
-TOKEN = os.getenv('TOKEN')
+dotenv.load_dotenv()
+#TOKEN = os.getenv('TOKEN')
+TOKEN=os.environ.get("TOKEN")
 
 # создание папки
 code_dir_create=function_test_load.direct_create(const_test_load.url, TOKEN)

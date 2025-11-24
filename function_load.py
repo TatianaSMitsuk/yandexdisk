@@ -4,22 +4,7 @@ import hashlib
 import const_test_load
 
 
-#формирует заголовок инициализацииб проверяя наличие файла окружения  с токеном
-# 1 тип - только токен
-# другой тип - еще тип данных (для загрузки файла)
-def head_init(token,type):
-    if token:
-        if type==1:
-            headers = {'Authorization': f'OAuth {token}'}
-        else:
-            headers = {
-                'Authorization': f'OAuth {token}',
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-    else:
-        print('Нет переменной окружения с ключем "TOKEN"')
 
-    return headers
 
 def direct_create (url, token):
 
@@ -44,7 +29,7 @@ def loading_file(filename, urlToFile, token):
         with open(filename, 'rb') as f:
             response = requests.put(dynamicUrl, f)
         if response.status_code == 201:
-            print("Файл успешно загружен!")
+            print("Файл "+const_test_load.file_name+" успешно загружен!")
         else:
             print(f"Ошибка при загрузке файла: {response.status_code}- {response.json()['message']}")
     else:
@@ -71,8 +56,6 @@ def folder_del(token, folder_path, const_url):
     return response.status_code
 
 def get_md5_for_file(file_path):
-
-
     md5_hash = hashlib.md5()
     with open(file_path, "rb") as f:
          for byte_block in iter(lambda: f.read(4096), b""):
