@@ -8,21 +8,16 @@ import const_test_load
 
 def direct_create (url, token):
 
-    if token:
-        headers = {'Authorization': f'OAuth {token}'}
-    else:
-        print('Нет переменной окружения с ключем "TOKEN"')
+    headers = {'Authorization': f'OAuth {token}'}
     response = requests.put(url, headers=headers)
     return (response.status_code,response.json().get("message"))
 
 def loading_file(filename, urlToFile, token):
-    if token:
-        headers = {
+    headers = {
                 'Authorization': f'OAuth {token}',
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
-    else:
-        print('Нет переменной окружения с ключем "TOKEN"')
+
     responseGET = requests.get(urlToFile, headers=headers)
     if responseGET.status_code == 200:
         dynamicUrl = responseGET.json()["href"]
@@ -37,10 +32,7 @@ def loading_file(filename, urlToFile, token):
     return responseGET.status_code
 
 def folder_del(token, folder_path, const_url):
-    if token:
-        headers = {'Authorization': f'OAuth {token}'}
-    else:
-        print('Нет переменной окружения с ключем "TOKEN"')
+    headers = {'Authorization': f'OAuth {token}'}
     params = {
         'path': folder_path
     }
@@ -64,9 +56,7 @@ def get_md5_for_file(file_path):
 
 
 def md5_file_yadisk(file_path, token):
-    if token:
-        headers = {'Authorization': f'OAuth {token}'}
-    else:
-        print('Нет переменной окружения с ключем "TOKEN"')
+
+    headers = {'Authorization': f'OAuth {token}'}
     response=requests.get(file_path,headers=headers)
     return response.json()['_embedded']['items'][0]['md5']
