@@ -6,23 +6,23 @@ import const_test_load
 
 
 
-def direct_create (url, token):
-
+def direct_create (dir_path, token):
+    url = f'{const_test_load.const_url}?path={dir_path}'
     headers = {'Authorization': f'OAuth {token}'}
     response = requests.put(url, headers=headers)
     return (response.status_code,response.json().get("message"))
 
-def loading_file(filename, urlToFile, token):
+def loading_file(filename, token):
     headers = {
                 'Authorization': f'OAuth {token}',
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
-
-    responseGET = requests.get(urlToFile, headers=headers)
+    url_to_file = f'{const_test_load.const_url}/upload?path={const_test_load.dir_path}/{const_test_load.file_name}'
+    responseGET = requests.get(url_to_file, headers=headers)
     if responseGET.status_code == 200:
-        dynamicUrl = responseGET.json()["href"]
+        dynamic_url = responseGET.json()["href"]
         with open(filename, 'rb') as f:
-            response = requests.put(dynamicUrl, f)
+            response = requests.put(dynamic_url, f)
         if response.status_code == 201:
             print("Файл "+const_test_load.file_name+" успешно загружен!")
         else:
@@ -31,18 +31,18 @@ def loading_file(filename, urlToFile, token):
         print(f"Ошибка при размещении файла: {responseGET.status_code}- {responseGET.json()['message']} ")
     return responseGET.status_code
 
-def folder_del(token, folder_path, const_url):
+def direct_del(token, direct_path, const_url):
     headers = {'Authorization': f'OAuth {token}'}
     params = {
-        'path': folder_path
+        'path': direct_path
     }
     response = requests.delete(const_url, headers=headers, params=params)
     if response.status_code in (200, 204):
-        print(f'Папка "{folder_path}" успешно удалена.')
+        print(f'Папка "{direct_path}" успешно удалена.')
     elif response.status_code == 202:
-        print(f'Запрос на удаление папки "{folder_path}" успешно принят.')
+        print(f'Запрос на удаление папки "{direct_path}" успешно принят.')
     else:
-        print(f'Ошибка при удалении папки "{folder_path}".')
+        print(f'Ошибка при удалении папки "{direct_path}".')
         print(f'Статус код: {response.status_code}')
         print(f'Ответ: {response.text}')
     return response.status_code
