@@ -25,4 +25,4 @@ def fixt_file_load(request):
 def test_load_file (fixt_file_load):
     md5_file_in = function_load.get_md5_for_file(const_test_load.file_name)
     url = f'{const_test_load.const_url}?path={const_test_load.dir_path}'
-    assert  str(md5_file_in) == str(function_load.md5_file_yadisk(url, TOKEN))
+    assert  str(md5_file_in) == str(function_load.get_md5_file_yadisk(url, TOKEN))
