@@ -9,16 +9,16 @@ def direct_create (token):
     requests.put(url, headers=headers)
 
 
-def loading_file(token):
+def loading_file_with_param(file_name, token):
     headers = {
                 'Authorization': f'OAuth {token}',
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
-    url_to_file = f'{const_test_load.const_url}/upload?path={const_test_load.dir_path}/{const_test_load.file_name}'
+    url_to_file = f'{const_test_load.const_url}/upload?path={const_test_load.dir_path}/{file_name}'
     response_get = requests.get(url_to_file, headers=headers)
     if response_get.status_code == 200:
         dynamic_url = response_get.json()["href"]
-        with open(const_test_load.file_name, 'rb') as f:
+        with open(file_name, 'rb') as f:
             requests.put(dynamic_url, f)
 
 
