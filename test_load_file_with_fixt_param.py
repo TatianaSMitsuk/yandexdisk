@@ -2,8 +2,9 @@ import dotenv
 import os
 import function_load
 import const_test_load
-import pytest
 import time
+import pytest
+
 
 
 dotenv.load_dotenv()
