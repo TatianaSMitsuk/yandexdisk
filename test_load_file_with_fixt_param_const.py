@@ -12,7 +12,7 @@ TOKEN = os.getenv('TOKEN')
 
 @pytest.fixture
 def fixt_file_load():
-    function_load.direct_create( TOKEN)
+    function_load.direct_create(TOKEN)
 
     yield
 
