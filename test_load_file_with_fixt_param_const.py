@@ -5,9 +5,6 @@ import const_test_load
 import time
 import pytest
 
-ex
-
-
 
 dotenv.load_dotenv()
 TOKEN = os.getenv('TOKEN')
