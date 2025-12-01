@@ -30,15 +30,15 @@ def direct_del(token):
     requests.delete(const_test_load.const_url, headers=headers, params=params)
 
 
-def get_md5_for_file(file_path):
+def get_md5_for_file(file_name):
     md5_hash = hashlib.md5()
-    with open(file_path, "rb") as f:
+    with open(file_name, "rb") as f:
          for byte_block in iter(lambda: f.read(4096), b""):
             md5_hash.update(byte_block)
     return md5_hash.hexdigest()
 
 
-def get_md5_file_yadisk(file_path, token):
+def get_md5_file_yadisk(direct_name, token):
     headers = {'Authorization': f'OAuth {token}'}
-    response=requests.get(file_path,headers=headers)
+    response=requests.get(direct_name,headers=headers)
     return response.json()['_embedded']['items'][0]['md5']
