@@ -2,7 +2,7 @@ import dotenv
 import os
 import function_load as f
 import const_test_load as cnst
-from random import choice
+import random
 import pytest
 
 
