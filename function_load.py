@@ -29,7 +29,6 @@ def direct_del(token):
         'path': const_test_load.dir_path
     }
     requests.delete(const_test_load.const_url, headers=headers, params=params)
-    print('Убрали за собой')
 
 
 def get_md5_for_file(file_name):
@@ -43,6 +42,7 @@ def get_md5_for_file(file_name):
 def get_md5_file_yadisk(direct_name, file_name, token):
     headers = {'Authorization': f'OAuth {token}'}
     response=requests.get(direct_name,headers=headers)
+    md_five=''
     for file_on_ydisk in response.json()['_embedded']['items']:
         if file_on_ydisk['name']==file_name:
             md_five=file_on_ydisk['md5']
@@ -69,11 +69,7 @@ def get_three_foto_of_breed(breed):
 
 def get_foto(url):
     dog_foto_name = url.split('/')[-1]
-    print(url)
-    print('Зашел', dog_foto_name)
-    dog_foto = requests.get('https://images.dog.ceo/breeds/husky/blue-car-travel.jpg')
-    print(dog_foto)
-    print('1')
+    dog_foto = requests.get(url)
     with open(dog_foto_name, 'wb') as file:
         file.write(dog_foto.content)
         print('2')
