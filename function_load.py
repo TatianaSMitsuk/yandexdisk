@@ -1,3 +1,4 @@
+from random import choice
 import requests
 import hashlib
 import const_test_load
@@ -48,6 +49,7 @@ def get_md5_file_yadisk(direct_name, file_name, token):
             md_five=file_on_ydisk['md5']
     return md_five
 
+
 def get_list_of_breed():
     response=requests.get(const_test_load.url_breed+'s/list/all')
     breed=[]
@@ -70,7 +72,7 @@ def get_foto(url):
     dog_foto_name = url.split('/')[-1]
     print(url)
     print('Зашел', dog_foto_name)
-    dog_foto = requests.get(url)
+    dog_foto = requests.get('https://images.dog.ceo/breeds/husky/blue-car-travel.jpg')
     print(dog_foto)
     print('1')
     with open(dog_foto_name, 'wb') as file:
@@ -89,3 +91,20 @@ def get_url_rand_foto_subbread(breed, sbb):
     url=const_test_load.url_breed+'/'+breed+'/'+sbb+'/images/random'
     url_file=requests.get(url)
     return url_file.json()['message']
+
+
+def get_url_lists_foto():
+    breed, breed_with_subb = get_list_of_breed()
+
+    br = random.choice(breed_with_subb)
+    sbb_list = get_subbread(br)
+    print('Порода ', br, ' с подпородами ', sbb_list, '\n' * 3)
+    url_foto_sbb = []
+    for sbb in sbb_list:
+        url = get_url_rand_foto_subbread(br, sbb)
+        url_foto_sbb.append(url)
+
+    br = random.choice(breed)
+    print('Порода ', br, ' без подпород ', '\n')
+    url_foto = get_three_foto_of_breed(br)
+    return url_foto,url_foto_sbb
