@@ -1,4 +1,4 @@
-from random import choice
+
 import requests
 import hashlib
 import const_test_load
@@ -70,14 +70,9 @@ def get_three_foto_of_breed(breed):
 
 def get_foto(url):
     dog_foto_name = url.split('/')[-1]
-    print(url)
-    print('Зашел', dog_foto_name)
-    dog_foto = requests.get('https://images.dog.ceo/breeds/husky/blue-car-travel.jpg')
-    print(dog_foto)
-    print('1')
+    dog_foto = requests.get(url)
     with open(dog_foto_name, 'wb') as file:
         file.write(dog_foto.content)
-        print('2')
     return dog_foto_name
 
 
@@ -93,18 +88,3 @@ def get_url_rand_foto_subbread(breed, sbb):
     return url_file.json()['message']
 
 
-def get_url_lists_foto():
-    breed, breed_with_subb = get_list_of_breed()
-
-    br = random.choice(breed_with_subb)
-    sbb_list = get_subbread(br)
-    print('Порода ', br, ' с подпородами ', sbb_list, '\n' * 3)
-    url_foto_sbb = []
-    for sbb in sbb_list:
-        url = get_url_rand_foto_subbread(br, sbb)
-        url_foto_sbb.append(url)
-
-    br = random.choice(breed)
-    print('Порода ', br, ' без подпород ', '\n')
-    url_foto = get_three_foto_of_breed(br)
-    return url_foto,url_foto_sbb

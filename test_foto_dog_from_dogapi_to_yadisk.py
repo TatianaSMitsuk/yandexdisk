@@ -2,8 +2,6 @@ import dotenv
 import os
 import function_load as f
 import const_test_load as cnst
-import requests
-import time
 import random
 import pytest
 
@@ -15,21 +13,18 @@ breed, breed_with_subb = f.get_list_of_breed()
 
 br = random.choice(breed_with_subb)
 sbb_list = f.get_subbread(br)
-print('Порода ', br, ' с подпородами ', sbb_list, '\n' * 3)
 url_foto_sbb = []
 for sbb in sbb_list:
     url = f.get_url_rand_foto_subbread(br, sbb)
     url_foto_sbb.append(url)
 
 br = random.choice(breed)
-print('Порода ', br, ' без подпород ', '\n')
 url_foto = f.get_three_foto_of_breed(br)
 
 
 @pytest.fixture
 def fixt_dog_fromAPI_toYAD():
     f.direct_create(TOKEN)
-
 
     yield
 
