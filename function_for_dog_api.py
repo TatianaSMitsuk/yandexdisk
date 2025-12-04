@@ -4,7 +4,7 @@ import random
 
 
 def get_list_of_breed():
-    response=requests.get(const_test_load.url_breed+'s/list/all')
+    response=requests.get(f'{const_test_load.url_breed}s/list/all')
     breed=[]
     breed_with_subb=[]
     for key,value in response.json()['message'].items():
@@ -16,7 +16,7 @@ def get_list_of_breed():
 
 
 def get_three_photo_of_breed(breed):
-    url_3_photo=const_test_load.url_breed+'/'+breed+'/images/random/3'
+    url_3_photo=f'{const_test_load.url_breed}/{breed}/images/random/3'
     response = requests.get(url_3_photo)
     list_photo_name=response.json()['message']
     return list_photo_name
@@ -30,13 +30,13 @@ def get_photo(url):
 
 
 def get_subbread(breed):
-    url_sbb=const_test_load.url_breed+'/'+breed+'/list'
+    url_sbb=f'{const_test_load.url_breed}/{breed}/list'
     sbb = requests.get(url_sbb)
     return sbb.json()['message']
 
 
 def get_url_rand_photo_subbread(breed, sbb):
-    url=const_test_load.url_breed+'/'+breed+'/'+sbb+'/images/random'
+    url=f'{const_test_load.url_breed}/{breed}/{sbb}/images/random'
     url_file=requests.get(url)
     return url_file.json()['message']
 
