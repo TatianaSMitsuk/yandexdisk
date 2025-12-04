@@ -20,7 +20,6 @@ def loading_file_with_param(file_name, token):
         dynamic_url = response_get.json()["href"]
         with open(file_name, 'rb') as f:
             requests.put(dynamic_url, f)
-            f.close()
 
 
 def direct_del(token):
@@ -49,41 +48,4 @@ def get_md5_file_yadisk(direct_name, file_name, token):
     return md_five
 
 
-def get_list_of_breed():
-    response=requests.get(const_test_load.url_breed+'s/list/all')
-    breed=[]
-    breed_with_subb=[]
-    for key,value in response.json()['message'].items():
-        if len(value)==0:
-            breed.append(key)
-        else:
-            breed_with_subb.append(key)
-    return breed, breed_with_subb
-
-
-def get_three_foto_of_breed(breed):
-    url_3_foto=const_test_load.url_breed+'/'+breed+'/images/random/3'
-    response = requests.get(url_3_foto)
-    list_foto_name=response.json()['message']
-    return list_foto_name
-
-def get_foto(url):
-    dog_foto_name = url.split('/')[-1]
-    dog_foto = requests.get(url)
-    with open(dog_foto_name, 'wb') as file:
-        file.write(dog_foto.content)
-        print('2')
-    return dog_foto_name
-
-
-def get_subbread(breed):
-    url_sbb=const_test_load.url_breed+'/'+breed+'/list'
-    sbb = requests.get(url_sbb)
-    return sbb.json()['message']
-
-
-def get_url_rand_foto_subbread(breed, sbb):
-    url=const_test_load.url_breed+'/'+breed+'/'+sbb+'/images/random'
-    url_file=requests.get(url)
-    return url_file.json()['message']
 
