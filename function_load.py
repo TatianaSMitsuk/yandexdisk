@@ -38,7 +38,14 @@ def get_md5_for_file(file_name):
     return md5_hash.hexdigest()
 
 
-def get_md5_file_yadisk(direct_name, token):
+def get_md5_file_yadisk(direct_name, file_name, token):
     headers = {'Authorization': f'OAuth {token}'}
     response=requests.get(direct_name,headers=headers)
-    return response.json()['_embedded']['items'][0]['md5']
+    md_five=''
+    for file_on_ydisk in response.json()['_embedded']['items']:
+        if file_on_ydisk['name']==file_name:
+            md_five=file_on_ydisk['md5']
+    return md_five
+
+
+
