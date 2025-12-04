@@ -21,7 +21,6 @@ def loading_file_with_param(file_name, token):
         dynamic_url = response_get.json()["href"]
         with open(file_name, 'rb') as f:
             requests.put(dynamic_url, f)
-            f.close()
 
 
 def direct_del(token):
