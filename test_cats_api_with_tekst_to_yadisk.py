@@ -25,5 +25,7 @@ def test_load_file (fixt_cat_api_to_yadisk,text):
 
     cat_foto=cat_api.get_random_photo(f'{const_for_cats.cats_url}/says/{text}?json=true')
     f.loading_file_with_param(cat_foto,TOKEN)
-    assert f.get_md5_for_file(cat_foto)==f.get_md5_file_yadisk(cnst.dir_path,cat_foto,TOKEN)
+    url_md5 = f'{cnst.const_url}?path={cnst.dir_path}&limit={str(len(const_for_cats.title))}'
+
+    assert f.get_md5_for_file(cat_foto)==f.get_md5_file_yadisk(url_md5,cat_foto,TOKEN)
     os.remove(cat_foto)
