@@ -1,3 +1,4 @@
+
 import requests
 import hashlib
 import const_test_load
@@ -28,6 +29,7 @@ def direct_del(token):
         'path': const_test_load.dir_path
     }
     requests.delete(const_test_load.const_url, headers=headers, params=params)
+    print('Убрали за собой')
 
 
 def get_md5_for_file(file_name):
@@ -38,7 +40,14 @@ def get_md5_for_file(file_name):
     return md5_hash.hexdigest()
 
 
-def get_md5_file_yadisk(direct_name, token):
+def get_md5_file_yadisk(direct_name, file_name, token):
     headers = {'Authorization': f'OAuth {token}'}
     response=requests.get(direct_name,headers=headers)
-    return response.json()['_embedded']['items'][0]['md5']
+    for file_on_ydisk in response.json()['_embedded']['items']:
+        if file_on_ydisk['name']==file_name:
+            md_five=file_on_ydisk['md5']
+    return md_five
+
+
+
+
