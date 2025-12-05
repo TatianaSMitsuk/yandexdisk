@@ -3,7 +3,7 @@ import os
 
 import const_for_cats
 import cat_api
-import function_work_witn_api_yadisk as f
+import yandex_disk as f
 import const_test_load as cnst
 import pytest
 
