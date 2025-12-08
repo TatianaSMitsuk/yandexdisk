@@ -1,7 +1,7 @@
 import dotenv
 import os
-import function_load as f
-import function_for_dog_api as fd
+import yandex_disk as f
+import dog_api as fd
 import const_test_load as cnst
 import random
 import pytest
