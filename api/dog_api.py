@@ -38,3 +38,18 @@ def get_url_rand_photo_subbread(breed, sbb):
     url=f'{const_test_load.url_breed}/{breed}/{sbb}/images/random'
     url_file=requests.get(url)
     return url_file.json()['message']
+
+
+def form_list_breed_and_sbb_photo():
+    breed, breed_with_subb = get_list_of_breed()
+
+    br = random.choice(breed_with_subb)
+    sbb_list = get_subbread(br)
+    url_photo_sbb = []
+    for sbb in sbb_list:
+        url = get_url_rand_photo_subbread(br, sbb)
+        url_photo_sbb.append(url)
+
+    br = random.choice(breed)
+    url_photo = get_three_photo_of_breed(br)
+    return url_photo, url_photo_sbb
