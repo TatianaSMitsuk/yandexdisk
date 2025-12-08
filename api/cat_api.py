@@ -4,8 +4,8 @@ import random
 
 def get_random_photo(url):
     cat_photo = requests.get(url)
-    type_foto=cat_photo.json()['mimetype'].split('/')[-1]
-    cat_photo_name = f'cat{random.randint(0, 1000)}.{type_foto}'
+    type_photo=cat_photo.json()['mimetype'].split('/')[-1]
+    cat_photo_name = f'cat{random.randint(0, 1000)}.{type_photo}'
     cat_photo=requests.get(cat_photo.json()['url'])
     with open(cat_photo_name, 'wb') as file:
         file.write(cat_photo.content)

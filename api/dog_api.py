@@ -1,4 +1,4 @@
-import const_test_load
+from api import const_test_load
 import requests
 
 

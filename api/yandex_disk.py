@@ -1,6 +1,6 @@
 import requests
 import hashlib
-import const_test_load
+from api import const_test_load
 
 
 def direct_create (token):
@@ -14,7 +14,7 @@ def loading_file_with_param(file_name, token):
                 'Authorization': f'OAuth {token}',
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
-    url_to_file = f'{const_test_load.const_url}/upload?path={const_test_load.dir_path}/{file_name}'
+    url_to_file = f'{const_test_load.const_url}/upload?path={const_test_load.dir_path}/{file_name.split("/")[-1]}'
     response_get = requests.get(url_to_file, headers=headers)
     if response_get.status_code == 200:
         dynamic_url = response_get.json()["href"]
@@ -42,9 +42,9 @@ def get_md5_file_yadisk(direct_name, file_name, token):
     headers = {'Authorization': f'OAuth {token}'}
     response=requests.get(direct_name,headers=headers)
     md_five=''
-    for file_on_ydisk in response.json()['_embedded']['items']:
-        if file_on_ydisk['name']==file_name:
-            md_five=file_on_ydisk['md5']
+    for file_on_yadisk in response.json()['_embedded']['items']:
+        if file_on_yadisk['name']==file_name:
+            md_five=file_on_yadisk['md5']
     return md_five
 
 
