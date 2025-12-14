@@ -1,9 +1,6 @@
 
 import dotenv
 import os
-
-import requests
-
 from api import constant_picture, const_test_load as constant, yandex_disk as f
 import pytest
 
