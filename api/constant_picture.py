@@ -1,0 +1,2 @@
+three_picture=['https://images.wallpaperscraft.ru/image/single/hvoia_shishki_kapli_1342293_240x320.jpg','https://images.wallpaperscraft.ru/image/single/elka_novyj_god_rozhdestvo_1482765_240x320.jpg','https://images.wallpaperscraft.ru/image/single/elochnyj_shar_ukrashenie_boke_1138401_240x320.jpg' ]
+directory_path='/New Year'
